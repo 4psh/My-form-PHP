@@ -1,0 +1,31 @@
+.social-icons img {
+    width: 30px;
+}
+
+.social-icons li {
+    display: inline-block;
+    list-style-type: none;
+    margin: 5px 3.5px;
+}
+
+.card-img {
+    width: 250px;
+    height: auto;
+    margin: 10px 0 10px 10px;
+}
+
+#soc-text {
+    text-align: center;
+    margin: 0 0 15px 0;
+    font-size: 12px;
+}
+
+.prof img {
+    margin: 0 10px;
+}
+
+.btn {
+    width: 100px;
+    height: 50px;
+}
+
