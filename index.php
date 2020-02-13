@@ -46,6 +46,37 @@ $s3 = "<span style='color: red;'>Вы указали неверный номер
 
 }
 
+if(isset($_POST['save']) && isset($_POST['email']) && isset($_POST['phone']) && isset($_POST['language']) && isset($_POST['item_list']) && isset($_POST['name']))
+{
+    //в TXT
+    $filename = "files/res.txt";
+    $fw = fopen($filename, "at") or die("Ошибка!");
+    fputs($fw, "Имя:".$name."\n"."Email:".$email."\n"."Телефон:".$teleph."\n"."Языки:".implode(", ", $language)."\n"."Языки программирования:".$item_list."\n"."\n");
+    fclose($fw);
 
+    //в JSON
+    $ar = ["Имя" => $name,
+           "Email" => $email,
+           "Телефон" => $teleph,
+           "Языки" => $language,
+           "Язык программирования" => $item_list
+    ];
+    $res = json_encode($ar, JSON_UNESCAPED_UNICODE);
+    file_put_contents("files/res.json", $res);
+
+    //в CSV
+    $ar2 = array (
+        array('Имя', 'Email', 'Телефон', 'Языки', "Язык программирования"),
+        array($name, $email, $teleph, implode(", ", $language), $item_list)
+    );
+    $fp = fopen('files/res.csv', 'w');
+    fputs( $fp, "\xEF\xBB\xBF" ); //UTF-8
+    foreach ($ar2 as $fields) {
+        fputcsv($fp, $fields, ';');
+    }
+    fclose($fp);
+
+
+}
 
 require_once "index.view.php";
